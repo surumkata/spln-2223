@@ -1,0 +1,263 @@
+[
+    {
+        "label": "re",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "re",
+        "description": "re",
+        "detail": "re",
+        "documentation": {}
+    },
+    {
+        "label": "json",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "json",
+        "description": "json",
+        "detail": "json",
+        "documentation": {}
+    },
+    {
+        "label": "removeHeaderFooter",
+        "kind": 2,
+        "importPath": "medicina",
+        "description": "medicina",
+        "peekOfCode": "def removeHeaderFooter(texto):\n    texto = re.sub(r'<text.* font=\"1\">ocabulario.*</text>', r'###', texto)\n    texto = re.sub(r'.*\\n###\\n.*\\n', r'___', texto)\n    texto = re.sub(r'<page.*\\n|</page>\\n', r'', texto)\n    return texto\ndef marcaEntradas(texto):\n    \"\"\"Marca entradas de vocabulario\"\"\"\n    texto = re.sub(r'<text.* font=\"3\"><b>\\s*(\\d+.*)</b></text>', r'###C\\1', texto)\n    texto = re.sub(r'<text.* font=\"3\"><b>\\s*(\\S.*)</b></text>', r'###R\\1', texto)\n    return texto",
+        "detail": "medicina",
+        "documentation": {}
+    },
+    {
+        "label": "marcaEntradas",
+        "kind": 2,
+        "importPath": "medicina",
+        "description": "medicina",
+        "peekOfCode": "def marcaEntradas(texto):\n    \"\"\"Marca entradas de vocabulario\"\"\"\n    texto = re.sub(r'<text.* font=\"3\"><b>\\s*(\\d+.*)</b></text>', r'###C\\1', texto)\n    texto = re.sub(r'<text.* font=\"3\"><b>\\s*(\\S.*)</b></text>', r'###R\\1', texto)\n    return texto\ndef marcaLinguas(texto):\n    texto = re.sub(r'<text.* font=\"0\">\\s*(\\w\\w)\\s*</text>', r'@\\1', texto)\n    return texto\ndef marcaTraducoes(texto):\n    texto = re.sub(r'<text.*font=\"7\">\\s*<i>\\s*(.*)</i>\\.*</text>', r'@T\\1', texto)",
+        "detail": "medicina",
+        "documentation": {}
+    },
+    {
+        "label": "marcaLinguas",
+        "kind": 2,
+        "importPath": "medicina",
+        "description": "medicina",
+        "peekOfCode": "def marcaLinguas(texto):\n    texto = re.sub(r'<text.* font=\"0\">\\s*(\\w\\w)\\s*</text>', r'@\\1', texto)\n    return texto\ndef marcaTraducoes(texto):\n    texto = re.sub(r'<text.*font=\"7\">\\s*<i>\\s*(.*)</i>\\.*</text>', r'@T\\1', texto)\n    texto = re.sub(r'\\n@T\\s*\\n(@T)?', r' ', texto)\n    return texto\ndef marcaAreas(texto):\n    texto = re.sub(r'<text.*font=\"5\">\\s*</text>\\n', r'', texto)\n    texto = re.sub(r'(###[CR].*\\n)<text.*font=\"6\">\\s*<i>\\s*(.*)</i>\\.*</text>', r'\\1!\\2', texto)",
+        "detail": "medicina",
+        "documentation": {}
+    },
+    {
+        "label": "marcaTraducoes",
+        "kind": 2,
+        "importPath": "medicina",
+        "description": "medicina",
+        "peekOfCode": "def marcaTraducoes(texto):\n    texto = re.sub(r'<text.*font=\"7\">\\s*<i>\\s*(.*)</i>\\.*</text>', r'@T\\1', texto)\n    texto = re.sub(r'\\n@T\\s*\\n(@T)?', r' ', texto)\n    return texto\ndef marcaAreas(texto):\n    texto = re.sub(r'<text.*font=\"5\">\\s*</text>\\n', r'', texto)\n    texto = re.sub(r'(###[CR].*\\n)<text.*font=\"6\">\\s*<i>\\s*(.*)</i>\\.*</text>', r'\\1!\\2', texto)\n    return texto\ndef marcaSinVar(texto):\n    #limpar fonte 0 5 vazios",
+        "detail": "medicina",
+        "documentation": {}
+    },
+    {
+        "label": "marcaAreas",
+        "kind": 2,
+        "importPath": "medicina",
+        "description": "medicina",
+        "peekOfCode": "def marcaAreas(texto):\n    texto = re.sub(r'<text.*font=\"5\">\\s*</text>\\n', r'', texto)\n    texto = re.sub(r'(###[CR].*\\n)<text.*font=\"6\">\\s*<i>\\s*(.*)</i>\\.*</text>', r'\\1!\\2', texto)\n    return texto\ndef marcaSinVar(texto):\n    #limpar fonte 0 5 vazios\n    texto = re.sub(r'<text.*font=\"[05]\">\\s*</text>', r'', texto)\n    #apanhar todos os sinonimos ou variacoes\n    texto = re.sub(r'<text.*font=\"[05]\">\\s*(SIN\\.-(.*?))?(VAR\\.-(.*))?</text>', r'$S\\2\\n$V\\4', texto)\n    return texto",
+        "detail": "medicina",
+        "documentation": {}
+    },
+    {
+        "label": "marcaSinVar",
+        "kind": 2,
+        "importPath": "medicina",
+        "description": "medicina",
+        "peekOfCode": "def marcaSinVar(texto):\n    #limpar fonte 0 5 vazios\n    texto = re.sub(r'<text.*font=\"[05]\">\\s*</text>', r'', texto)\n    #apanhar todos os sinonimos ou variacoes\n    texto = re.sub(r'<text.*font=\"[05]\">\\s*(SIN\\.-(.*?))?(VAR\\.-(.*))?</text>', r'$S\\2\\n$V\\4', texto)\n    return texto\ndef marcaVid(texto):\n    texto = re.sub(r'<text.*font=\"[05]\">\\s*Vid\\.-(.*)</text>', r'$I\\1', texto)\n    #juntar alguns irregulares\n    texto = re.sub(r'\\$I(.*)\\n<text.*font=\"5\">(.*)</text>',r'\\1\\2',texto)",
+        "detail": "medicina",
+        "documentation": {}
+    },
+    {
+        "label": "marcaVid",
+        "kind": 2,
+        "importPath": "medicina",
+        "description": "medicina",
+        "peekOfCode": "def marcaVid(texto):\n    texto = re.sub(r'<text.*font=\"[05]\">\\s*Vid\\.-(.*)</text>', r'$I\\1', texto)\n    #juntar alguns irregulares\n    texto = re.sub(r'\\$I(.*)\\n<text.*font=\"5\">(.*)</text>',r'\\1\\2',texto)\n    return texto\ndef marcaNota(texto):\n    texto = re.sub(r'<text.*font=\"9\">(.*)</text>', r'#N\\1', texto)\n    texto = re.sub(r'#N\\s*Nota\\.-', r'#N', texto)\n    # texto = re.sub(r'#N\\s*\\n',r'',texto)\n    # texto = re.sub(r'\\n#N\\s*(?!Nota\\.-)(.*)\\n',r'\\1',texto)",
+        "detail": "medicina",
+        "documentation": {}
+    },
+    {
+        "label": "marcaNota",
+        "kind": 2,
+        "importPath": "medicina",
+        "description": "medicina",
+        "peekOfCode": "def marcaNota(texto):\n    texto = re.sub(r'<text.*font=\"9\">(.*)</text>', r'#N\\1', texto)\n    texto = re.sub(r'#N\\s*Nota\\.-', r'#N', texto)\n    # texto = re.sub(r'#N\\s*\\n',r'',texto)\n    # texto = re.sub(r'\\n#N\\s*(?!Nota\\.-)(.*)\\n',r'\\1',texto)\n    # texto = re.sub(r'(#N[^<]*)',r'\\1\\n',texto)\n    return texto\ndef limpaResto(texto):\n    texto = re.sub(r'<.*>\\n?', r'', texto)\n    texto = re.sub(r'\\n\\s*\\n', r'\\n', texto)",
+        "detail": "medicina",
+        "documentation": {}
+    },
+    {
+        "label": "limpaResto",
+        "kind": 2,
+        "importPath": "medicina",
+        "description": "medicina",
+        "peekOfCode": "def limpaResto(texto):\n    texto = re.sub(r'<.*>\\n?', r'', texto)\n    texto = re.sub(r'\\n\\s*\\n', r'\\n', texto)\n    return texto\ntexto = open('medicina.xml', 'r+', encoding=\"utf8\").read()\ntexto = removeHeaderFooter(texto)\ntexto = marcaEntradas(texto)\ntexto = marcaLinguas(texto)\ntexto = marcaTraducoes(texto)\ntexto = marcaAreas(texto)",
+        "detail": "medicina",
+        "documentation": {}
+    },
+    {
+        "label": "texto",
+        "kind": 5,
+        "importPath": "medicina",
+        "description": "medicina",
+        "peekOfCode": "texto = open('medicina.xml', 'r+', encoding=\"utf8\").read()\ntexto = removeHeaderFooter(texto)\ntexto = marcaEntradas(texto)\ntexto = marcaLinguas(texto)\ntexto = marcaTraducoes(texto)\ntexto = marcaAreas(texto)\ntexto = marcaSinVar(texto)\ntexto = marcaVid(texto)\ntexto = marcaNota(texto)\ntexto = limpaResto(texto)",
+        "detail": "medicina",
+        "documentation": {}
+    },
+    {
+        "label": "texto",
+        "kind": 5,
+        "importPath": "medicina",
+        "description": "medicina",
+        "peekOfCode": "texto = removeHeaderFooter(texto)\ntexto = marcaEntradas(texto)\ntexto = marcaLinguas(texto)\ntexto = marcaTraducoes(texto)\ntexto = marcaAreas(texto)\ntexto = marcaSinVar(texto)\ntexto = marcaVid(texto)\ntexto = marcaNota(texto)\ntexto = limpaResto(texto)\n# dicionario",
+        "detail": "medicina",
+        "documentation": {}
+    },
+    {
+        "label": "texto",
+        "kind": 5,
+        "importPath": "medicina",
+        "description": "medicina",
+        "peekOfCode": "texto = marcaEntradas(texto)\ntexto = marcaLinguas(texto)\ntexto = marcaTraducoes(texto)\ntexto = marcaAreas(texto)\ntexto = marcaSinVar(texto)\ntexto = marcaVid(texto)\ntexto = marcaNota(texto)\ntexto = limpaResto(texto)\n# dicionario\nentradas = texto.split('###')",
+        "detail": "medicina",
+        "documentation": {}
+    },
+    {
+        "label": "texto",
+        "kind": 5,
+        "importPath": "medicina",
+        "description": "medicina",
+        "peekOfCode": "texto = marcaLinguas(texto)\ntexto = marcaTraducoes(texto)\ntexto = marcaAreas(texto)\ntexto = marcaSinVar(texto)\ntexto = marcaVid(texto)\ntexto = marcaNota(texto)\ntexto = limpaResto(texto)\n# dicionario\nentradas = texto.split('###')\ncompletas = {}",
+        "detail": "medicina",
+        "documentation": {}
+    },
+    {
+        "label": "texto",
+        "kind": 5,
+        "importPath": "medicina",
+        "description": "medicina",
+        "peekOfCode": "texto = marcaTraducoes(texto)\ntexto = marcaAreas(texto)\ntexto = marcaSinVar(texto)\ntexto = marcaVid(texto)\ntexto = marcaNota(texto)\ntexto = limpaResto(texto)\n# dicionario\nentradas = texto.split('###')\ncompletas = {}\nremissivas = {}",
+        "detail": "medicina",
+        "documentation": {}
+    },
+    {
+        "label": "texto",
+        "kind": 5,
+        "importPath": "medicina",
+        "description": "medicina",
+        "peekOfCode": "texto = marcaAreas(texto)\ntexto = marcaSinVar(texto)\ntexto = marcaVid(texto)\ntexto = marcaNota(texto)\ntexto = limpaResto(texto)\n# dicionario\nentradas = texto.split('###')\ncompletas = {}\nremissivas = {}\nerros = 0",
+        "detail": "medicina",
+        "documentation": {}
+    },
+    {
+        "label": "texto",
+        "kind": 5,
+        "importPath": "medicina",
+        "description": "medicina",
+        "peekOfCode": "texto = marcaSinVar(texto)\ntexto = marcaVid(texto)\ntexto = marcaNota(texto)\ntexto = limpaResto(texto)\n# dicionario\nentradas = texto.split('###')\ncompletas = {}\nremissivas = {}\nerros = 0\nfor entrada in entradas:",
+        "detail": "medicina",
+        "documentation": {}
+    },
+    {
+        "label": "texto",
+        "kind": 5,
+        "importPath": "medicina",
+        "description": "medicina",
+        "peekOfCode": "texto = marcaVid(texto)\ntexto = marcaNota(texto)\ntexto = limpaResto(texto)\n# dicionario\nentradas = texto.split('###')\ncompletas = {}\nremissivas = {}\nerros = 0\nfor entrada in entradas:\n    try:",
+        "detail": "medicina",
+        "documentation": {}
+    },
+    {
+        "label": "texto",
+        "kind": 5,
+        "importPath": "medicina",
+        "description": "medicina",
+        "peekOfCode": "texto = marcaNota(texto)\ntexto = limpaResto(texto)\n# dicionario\nentradas = texto.split('###')\ncompletas = {}\nremissivas = {}\nerros = 0\nfor entrada in entradas:\n    try:\n        if entrada[0] == 'C':",
+        "detail": "medicina",
+        "documentation": {}
+    },
+    {
+        "label": "texto",
+        "kind": 5,
+        "importPath": "medicina",
+        "description": "medicina",
+        "peekOfCode": "texto = limpaResto(texto)\n# dicionario\nentradas = texto.split('###')\ncompletas = {}\nremissivas = {}\nerros = 0\nfor entrada in entradas:\n    try:\n        if entrada[0] == 'C':\n            linhas = entrada.split('\\n')",
+        "detail": "medicina",
+        "documentation": {}
+    },
+    {
+        "label": "entradas",
+        "kind": 5,
+        "importPath": "medicina",
+        "description": "medicina",
+        "peekOfCode": "entradas = texto.split('###')\ncompletas = {}\nremissivas = {}\nerros = 0\nfor entrada in entradas:\n    try:\n        if entrada[0] == 'C':\n            linhas = entrada.split('\\n')\n            assinatura = linhas[0]\n            assinatura = re.match(r'C(\\d+)\\s+(\\w*\\s*)+\\s+(\\w)',assinatura)",
+        "detail": "medicina",
+        "documentation": {}
+    },
+    {
+        "label": "completas",
+        "kind": 5,
+        "importPath": "medicina",
+        "description": "medicina",
+        "peekOfCode": "completas = {}\nremissivas = {}\nerros = 0\nfor entrada in entradas:\n    try:\n        if entrada[0] == 'C':\n            linhas = entrada.split('\\n')\n            assinatura = linhas[0]\n            assinatura = re.match(r'C(\\d+)\\s+(\\w*\\s*)+\\s+(\\w)',assinatura)\n            if assinatura.groups:",
+        "detail": "medicina",
+        "documentation": {}
+    },
+    {
+        "label": "remissivas",
+        "kind": 5,
+        "importPath": "medicina",
+        "description": "medicina",
+        "peekOfCode": "remissivas = {}\nerros = 0\nfor entrada in entradas:\n    try:\n        if entrada[0] == 'C':\n            linhas = entrada.split('\\n')\n            assinatura = linhas[0]\n            assinatura = re.match(r'C(\\d+)\\s+(\\w*\\s*)+\\s+(\\w)',assinatura)\n            if assinatura.groups:\n                numero = int(assinatura.group(1))",
+        "detail": "medicina",
+        "documentation": {}
+    },
+    {
+        "label": "erros",
+        "kind": 5,
+        "importPath": "medicina",
+        "description": "medicina",
+        "peekOfCode": "erros = 0\nfor entrada in entradas:\n    try:\n        if entrada[0] == 'C':\n            linhas = entrada.split('\\n')\n            assinatura = linhas[0]\n            assinatura = re.match(r'C(\\d+)\\s+(\\w*\\s*)+\\s+(\\w)',assinatura)\n            if assinatura.groups:\n                numero = int(assinatura.group(1))\n                nome = assinatura.group(2)",
+        "detail": "medicina",
+        "documentation": {}
+    },
+    {
+        "label": "file",
+        "kind": 5,
+        "importPath": "medicina",
+        "description": "medicina",
+        "peekOfCode": "file = open('medicina_marcado.xml', 'w')\nfile.write(texto)\ndados = {\n    'completas' : completas,\n    'remissivas' : remissivas,\n}\njson_dump = json.dumps(dados,indent=4)\nfile = open('medicina.json','w',encoding='utf-8')\nfile.write(json_dump)\nprint(f'Resultados:\\n Entradas completas = {len(dados[\"completas\"])}\\n Entradas remissivas = {len(dados[\"remissivas\"])}\\n Entradas com erros = {erros}')",
+        "detail": "medicina",
+        "documentation": {}
+    },
+    {
+        "label": "dados",
+        "kind": 5,
+        "importPath": "medicina",
+        "description": "medicina",
+        "peekOfCode": "dados = {\n    'completas' : completas,\n    'remissivas' : remissivas,\n}\njson_dump = json.dumps(dados,indent=4)\nfile = open('medicina.json','w',encoding='utf-8')\nfile.write(json_dump)\nprint(f'Resultados:\\n Entradas completas = {len(dados[\"completas\"])}\\n Entradas remissivas = {len(dados[\"remissivas\"])}\\n Entradas com erros = {erros}')",
+        "detail": "medicina",
+        "documentation": {}
+    },
+    {
+        "label": "json_dump",
+        "kind": 5,
+        "importPath": "medicina",
+        "description": "medicina",
+        "peekOfCode": "json_dump = json.dumps(dados,indent=4)\nfile = open('medicina.json','w',encoding='utf-8')\nfile.write(json_dump)\nprint(f'Resultados:\\n Entradas completas = {len(dados[\"completas\"])}\\n Entradas remissivas = {len(dados[\"remissivas\"])}\\n Entradas com erros = {erros}')",
+        "detail": "medicina",
+        "documentation": {}
+    },
+    {
+        "label": "file",
+        "kind": 5,
+        "importPath": "medicina",
+        "description": "medicina",
+        "peekOfCode": "file = open('medicina.json','w',encoding='utf-8')\nfile.write(json_dump)\nprint(f'Resultados:\\n Entradas completas = {len(dados[\"completas\"])}\\n Entradas remissivas = {len(dados[\"remissivas\"])}\\n Entradas com erros = {erros}')",
+        "detail": "medicina",
+        "documentation": {}
+    }
+]
