@@ -121,11 +121,11 @@ for entrada in entradas:
         if entrada[0] == 'C':
             linhas = entrada.split('\n')
             assinatura = linhas[0]
-            assinatura = re.match(r'C(\d+)\s+(\w*\s*)+\s+(\w)',assinatura)
+            assinatura = re.match(r'C(\d+)\s+((\w*\s*)+)\s+(\w)',assinatura)
             if assinatura.groups:
                 numero = int(assinatura.group(1))
                 nome = assinatura.group(2)
-                genero = assinatura.group(3)
+                genero = assinatura.group(4)
                 areas = []
                 sinonimos = []
                 variacoes = []
@@ -134,6 +134,7 @@ for entrada in entradas:
                     'en' : [],
                     'es' : [],
                     'la' : [],
+                    'gl' : [],
                 }
                 nota = ''
                 flag = ''
@@ -159,20 +160,21 @@ for entrada in entradas:
                             elif '@la' in linha:
                                 flag = 'la'
                             else:
-                                traducoes[flag].append(linha[2:])
+                                traducoes[flag].append({"termo":linha[2:]})
                         elif '#N' in linha:
                             nota += linha[2:]
+                traducoes['gl'].append({
+                    "termo": nome,
+                    "genero":genero,
+                    "nota":nota
+                    })
                 completas[numero] = {
-                    'numero' : numero,
-                    'nome' : nome,
-                    'genero' : genero,
                     'areas' : areas,
                     'sinonimos' : sinonimos,
                     'variacoes' : variacoes,
                     'traducoes' : traducoes,
-                    'nota' : nota,
-
                 }
+                
 
         elif entrada[0] == 'R':
             linhas = entrada.split('\n')
@@ -195,7 +197,7 @@ for entrada in entradas:
         erros+=1
 
 
-file = open('medicina_marcado.xml', 'w')
+file = open('medicina_marcado.txt', 'w')
 file.write(texto)
 
 dados = {
