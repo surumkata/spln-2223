@@ -1,0 +1,354 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> Dict
+Rule 1     Dict -> EntradasC NL
+Rule 2     EntradasC -> EntradasC NL EntradaC
+Rule 3     EntradasC -> EntradaC
+Rule 4     EntradaC -> Areas Linguas
+Rule 5     Areas -> AREAS Text NL
+Rule 6     Areas -> <empty>
+Rule 7     Text -> TEXT
+Rule 8     Text -> <empty>
+Rule 9     Linguas -> LANGUAGES NL DictLinguas
+Rule 10    DictLinguas -> DictLinguas DictLingua
+Rule 11    DictLinguas -> DictLingua
+Rule 12    DictLingua -> LANGUAGE NL DictTermos
+Rule 13    DictTermos -> DictTermos DictTermo
+Rule 14    DictTermos -> DictTermo
+Rule 15    DictTermo -> # TEXT NL Atributos
+Rule 16    Atributos -> Atributos Atributo
+Rule 17    Atributos -> <empty>
+Rule 18    Atributo -> ATRIBUTOS As NL
+Rule 19    As -> As ATRIBUTO
+Rule 20    As -> ATRIBUTO
+
+Terminals, with rules where they appear
+
+#                    : 15
+AREAS                : 5
+ATRIBUTO             : 19 20
+ATRIBUTOS            : 18
+LANGUAGE             : 12
+LANGUAGES            : 9
+NL                   : 1 2 5 9 12 15 18
+TEXT                 : 7 15
+error                : 
+
+Nonterminals, with rules where they appear
+
+Areas                : 4
+As                   : 18 19
+Atributo             : 16
+Atributos            : 15 16
+Dict                 : 0
+DictLingua           : 10 11
+DictLinguas          : 9 10
+DictTermo            : 13 14
+DictTermos           : 12 13
+EntradaC             : 2 3
+EntradasC            : 1 2
+Linguas              : 4
+Text                 : 5
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . Dict
+    (1) Dict -> . EntradasC NL
+    (2) EntradasC -> . EntradasC NL EntradaC
+    (3) EntradasC -> . EntradaC
+    (4) EntradaC -> . Areas Linguas
+    (5) Areas -> . AREAS Text NL
+    (6) Areas -> .
+
+    AREAS           shift and go to state 5
+    LANGUAGES       reduce using rule 6 (Areas -> .)
+
+    Dict                           shift and go to state 1
+    EntradasC                      shift and go to state 2
+    EntradaC                       shift and go to state 3
+    Areas                          shift and go to state 4
+
+state 1
+
+    (0) S' -> Dict .
+
+
+
+state 2
+
+    (1) Dict -> EntradasC . NL
+    (2) EntradasC -> EntradasC . NL EntradaC
+
+    NL              shift and go to state 6
+
+
+state 3
+
+    (3) EntradasC -> EntradaC .
+
+    NL              reduce using rule 3 (EntradasC -> EntradaC .)
+
+
+state 4
+
+    (4) EntradaC -> Areas . Linguas
+    (9) Linguas -> . LANGUAGES NL DictLinguas
+
+    LANGUAGES       shift and go to state 8
+
+    Linguas                        shift and go to state 7
+
+state 5
+
+    (5) Areas -> AREAS . Text NL
+    (7) Text -> . TEXT
+    (8) Text -> .
+
+    TEXT            shift and go to state 10
+    NL              reduce using rule 8 (Text -> .)
+
+    Text                           shift and go to state 9
+
+state 6
+
+    (1) Dict -> EntradasC NL .
+    (2) EntradasC -> EntradasC NL . EntradaC
+    (4) EntradaC -> . Areas Linguas
+    (5) Areas -> . AREAS Text NL
+    (6) Areas -> .
+
+    $end            reduce using rule 1 (Dict -> EntradasC NL .)
+    AREAS           shift and go to state 5
+    LANGUAGES       reduce using rule 6 (Areas -> .)
+
+    EntradaC                       shift and go to state 11
+    Areas                          shift and go to state 4
+
+state 7
+
+    (4) EntradaC -> Areas Linguas .
+
+    NL              reduce using rule 4 (EntradaC -> Areas Linguas .)
+
+
+state 8
+
+    (9) Linguas -> LANGUAGES . NL DictLinguas
+
+    NL              shift and go to state 12
+
+
+state 9
+
+    (5) Areas -> AREAS Text . NL
+
+    NL              shift and go to state 13
+
+
+state 10
+
+    (7) Text -> TEXT .
+
+    NL              reduce using rule 7 (Text -> TEXT .)
+
+
+state 11
+
+    (2) EntradasC -> EntradasC NL EntradaC .
+
+    NL              reduce using rule 2 (EntradasC -> EntradasC NL EntradaC .)
+
+
+state 12
+
+    (9) Linguas -> LANGUAGES NL . DictLinguas
+    (10) DictLinguas -> . DictLinguas DictLingua
+    (11) DictLinguas -> . DictLingua
+    (12) DictLingua -> . LANGUAGE NL DictTermos
+
+    LANGUAGE        shift and go to state 16
+
+    DictLinguas                    shift and go to state 14
+    DictLingua                     shift and go to state 15
+
+state 13
+
+    (5) Areas -> AREAS Text NL .
+
+    LANGUAGES       reduce using rule 5 (Areas -> AREAS Text NL .)
+
+
+state 14
+
+    (9) Linguas -> LANGUAGES NL DictLinguas .
+    (10) DictLinguas -> DictLinguas . DictLingua
+    (12) DictLingua -> . LANGUAGE NL DictTermos
+
+    NL              reduce using rule 9 (Linguas -> LANGUAGES NL DictLinguas .)
+    LANGUAGE        shift and go to state 16
+
+    DictLingua                     shift and go to state 17
+
+state 15
+
+    (11) DictLinguas -> DictLingua .
+
+    LANGUAGE        reduce using rule 11 (DictLinguas -> DictLingua .)
+    NL              reduce using rule 11 (DictLinguas -> DictLingua .)
+
+
+state 16
+
+    (12) DictLingua -> LANGUAGE . NL DictTermos
+
+    NL              shift and go to state 18
+
+
+state 17
+
+    (10) DictLinguas -> DictLinguas DictLingua .
+
+    LANGUAGE        reduce using rule 10 (DictLinguas -> DictLinguas DictLingua .)
+    NL              reduce using rule 10 (DictLinguas -> DictLinguas DictLingua .)
+
+
+state 18
+
+    (12) DictLingua -> LANGUAGE NL . DictTermos
+    (13) DictTermos -> . DictTermos DictTermo
+    (14) DictTermos -> . DictTermo
+    (15) DictTermo -> . # TEXT NL Atributos
+
+    #               shift and go to state 21
+
+    DictTermos                     shift and go to state 19
+    DictTermo                      shift and go to state 20
+
+state 19
+
+    (12) DictLingua -> LANGUAGE NL DictTermos .
+    (13) DictTermos -> DictTermos . DictTermo
+    (15) DictTermo -> . # TEXT NL Atributos
+
+    LANGUAGE        reduce using rule 12 (DictLingua -> LANGUAGE NL DictTermos .)
+    NL              reduce using rule 12 (DictLingua -> LANGUAGE NL DictTermos .)
+    #               shift and go to state 21
+
+    DictTermo                      shift and go to state 22
+
+state 20
+
+    (14) DictTermos -> DictTermo .
+
+    #               reduce using rule 14 (DictTermos -> DictTermo .)
+    LANGUAGE        reduce using rule 14 (DictTermos -> DictTermo .)
+    NL              reduce using rule 14 (DictTermos -> DictTermo .)
+
+
+state 21
+
+    (15) DictTermo -> # . TEXT NL Atributos
+
+    TEXT            shift and go to state 23
+
+
+state 22
+
+    (13) DictTermos -> DictTermos DictTermo .
+
+    #               reduce using rule 13 (DictTermos -> DictTermos DictTermo .)
+    LANGUAGE        reduce using rule 13 (DictTermos -> DictTermos DictTermo .)
+    NL              reduce using rule 13 (DictTermos -> DictTermos DictTermo .)
+
+
+state 23
+
+    (15) DictTermo -> # TEXT . NL Atributos
+
+    NL              shift and go to state 24
+
+
+state 24
+
+    (15) DictTermo -> # TEXT NL . Atributos
+    (16) Atributos -> . Atributos Atributo
+    (17) Atributos -> .
+
+    ATRIBUTOS       reduce using rule 17 (Atributos -> .)
+    #               reduce using rule 17 (Atributos -> .)
+    LANGUAGE        reduce using rule 17 (Atributos -> .)
+    NL              reduce using rule 17 (Atributos -> .)
+
+    Atributos                      shift and go to state 25
+
+state 25
+
+    (15) DictTermo -> # TEXT NL Atributos .
+    (16) Atributos -> Atributos . Atributo
+    (18) Atributo -> . ATRIBUTOS As NL
+
+    #               reduce using rule 15 (DictTermo -> # TEXT NL Atributos .)
+    LANGUAGE        reduce using rule 15 (DictTermo -> # TEXT NL Atributos .)
+    NL              reduce using rule 15 (DictTermo -> # TEXT NL Atributos .)
+    ATRIBUTOS       shift and go to state 27
+
+    Atributo                       shift and go to state 26
+
+state 26
+
+    (16) Atributos -> Atributos Atributo .
+
+    ATRIBUTOS       reduce using rule 16 (Atributos -> Atributos Atributo .)
+    #               reduce using rule 16 (Atributos -> Atributos Atributo .)
+    LANGUAGE        reduce using rule 16 (Atributos -> Atributos Atributo .)
+    NL              reduce using rule 16 (Atributos -> Atributos Atributo .)
+
+
+state 27
+
+    (18) Atributo -> ATRIBUTOS . As NL
+    (19) As -> . As ATRIBUTO
+    (20) As -> . ATRIBUTO
+
+    ATRIBUTO        shift and go to state 29
+
+    As                             shift and go to state 28
+
+state 28
+
+    (18) Atributo -> ATRIBUTOS As . NL
+    (19) As -> As . ATRIBUTO
+
+    NL              shift and go to state 30
+    ATRIBUTO        shift and go to state 31
+
+
+state 29
+
+    (20) As -> ATRIBUTO .
+
+    NL              reduce using rule 20 (As -> ATRIBUTO .)
+    ATRIBUTO        reduce using rule 20 (As -> ATRIBUTO .)
+
+
+state 30
+
+    (18) Atributo -> ATRIBUTOS As NL .
+
+    ATRIBUTOS       reduce using rule 18 (Atributo -> ATRIBUTOS As NL .)
+    #               reduce using rule 18 (Atributo -> ATRIBUTOS As NL .)
+    LANGUAGE        reduce using rule 18 (Atributo -> ATRIBUTOS As NL .)
+    NL              reduce using rule 18 (Atributo -> ATRIBUTOS As NL .)
+
+
+state 31
+
+    (19) As -> As ATRIBUTO .
+
+    NL              reduce using rule 19 (As -> As ATRIBUTO .)
+    ATRIBUTO        reduce using rule 19 (As -> As ATRIBUTO .)
+
