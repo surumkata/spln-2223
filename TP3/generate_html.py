@@ -11,7 +11,7 @@ def only_termos (list):
 
     return r[:-1]
 
-file = open('entries_dic','rb')
+file = open('medicina_bin','rb')
 
 dic = pickle.load(file)
 file.close()
