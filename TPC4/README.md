@@ -28,3 +28,6 @@ Informa que tem poemas marcados, estes serão guardados e imprimidos posteriorme
 
 - -o [Filename] :
 Atribui um ficheiro de output ao programa (default, o programa imprime para o stdout)
+
+- -e [Encoding] :
+Atribui um encoding do ficheiro de input/output, por default o programa associa o utf8.

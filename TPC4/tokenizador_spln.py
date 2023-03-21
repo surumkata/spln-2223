@@ -6,7 +6,7 @@ import re
 output = 'stdout'
 input = 'stdin'
 has_poems = False
-encoding = 'utf-8'
+encoding = 'utf8'
 
 # Processar argumentos e ver os erros de argumentos
 args = " ".join(sys.argv[1:])
@@ -30,6 +30,8 @@ if '-' in args:
             has_poems = True
         elif flag == 'o':
             output = arg.strip()
+        elif flag == 'e':
+            encoding = arg.strip()
         else:
             print(f'Error: This flag: {flag} do not exist.')
 else:
