@@ -5,7 +5,7 @@
 * **test.py**: Programa que testa o modelo com analogias
 
 Neste tpc foi pedido para continuar fazer um programa semalhante ao da aula so que com os jornais do tpc6 invês dos livros do Harry Potter.
-Os ficheiros e funcionalidades seguem semelhantes aos feitos na aula.
+Os ficheiros e funcionalidades seguem praticamente semelhantes aos feitos na aula, divergindo só que existe uma opção que invês de ler o corpus de ficheiros .txt, ler de ficheiros .html('-html'), isto deve-se ao facto de ter guardado as notícias todas em html no tpc passado. Do .html ele utiliza todo o texto entre as tags <text></text>.
 
 Nos testes de analogias, o programa lê de um .txt e testa linha a linha.
 É possível fazer 3 opções de testes:
