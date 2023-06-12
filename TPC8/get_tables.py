@@ -9,9 +9,9 @@ url = sys.argv[1]
 
 conteudo = requests.get(url).text
 
-dt = bs(conteudo,'lxml')
+bs = bs(conteudo,'lxml')
 
-tables = dt.find_all('table')
+tables = bs.find_all('table')
 
 
 for i,table in enumerate(tables):
