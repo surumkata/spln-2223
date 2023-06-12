@@ -16,7 +16,7 @@ def symlink():
 
 def log(log : str, logsFile):
     now = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-    logsFile.write(log + f'[{now}]\n')
+    logsFile.write(f'{log}[{now}]\n')
 
 def create_dirs():
     #create date dirs
